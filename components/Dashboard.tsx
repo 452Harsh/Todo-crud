@@ -24,16 +24,24 @@ export default function UserDashboard() {
     // }, [userInfo])
 
     async function handleAddTodo() {
-        if (!todo) { return }
-        const newKey = Object.keys(todos).length === 0 ? 1 : Math.max(...Object.keys(todos)) + 1
-        setTodos({ ...todos, [newKey]: todo })
-        const userRef = doc(db, 'users', currentUser.uid)
+        if (!todo) {
+            return;
+        }
+
+        const keys = Object.keys(todos);
+        const newKey = keys.length === 0 ? 1 : Math.max(...keys.map(Number)) + 1;
+
+        setTodos({ ...todos, [newKey]: todo });
+
+        const userRef = doc(db, 'users', currentUser.uid);
+
         await setDoc(userRef, {
-            'todos': {
-                [newKey]: todo
-            }
-        }, { merge: true })
-        setTodo('')
+            todos: {
+                [newKey]: todo,
+            },
+        }, { merge: true });
+
+        setTodo('');
     }
 
     async function handleEditTodo() {
