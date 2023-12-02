@@ -5,8 +5,8 @@ const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState(null);
-  const [isLogIn,setIsLogIn] = useState(true);
-  const { login , signup ,currentUser} = useAuth();
+  const [isLogIn, setIsLogIn] = useState(true);
+  const { login, signup, currentUser } = useAuth();
   console.log(currentUser);
 
 
@@ -15,15 +15,15 @@ const Login = () => {
       setError("Please enter valid email and password");
       return;
     }
-    if(isLogIn){
-      try{
-        await login(email,password);
-      }catch(err){
+    if (isLogIn) {
+      try {
+        await login(email, password);
+      } catch (err) {
         setError('Incorrect email and password')
       }
       return;
     }
-    await signup(email,password);
+    await signup(email, password);
   }
   return (
     <div className="flex-1 flex flex-col justify-center items-center gap-4">
@@ -53,7 +53,7 @@ const Login = () => {
       >
         Submit
       </button>
-      <h2 className="duration-300 hover:scale-110 cursor-pointer" onClick={()=> setIsLogIn(!isLogIn)}>{!isLogIn ? 'Login' : 'Register'}</h2>
+      <h2 className="duration-300 hover:scale-110 cursor-pointer" onClick={() => setIsLogIn(!isLogIn)}>{!isLogIn ? 'Login' : 'Register'}</h2>
     </div>
   );
 };
